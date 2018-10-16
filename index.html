@@ -319,32 +319,15 @@
 
       
         
-          
-            <h2 id="列表修改项的更新实现"><a href="#列表修改项的更新实现" class="headerlink" title="列表修改项的更新实现"></a>列表修改项的更新实现</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景:"></a>背景:</h3><p>在管理系统的实现中, 经常会碰到, 需要把数据库的数据某张表的数据显示在一个页面里, 然后在这个页面中对数据进行修改,最后将修改的内容<code>UPDATE</code>到数据库的表中.</p>
-<h3 id="问题的提出"><a href="#问题的提出" class="headerlink" title="问题的提出"></a>问题的提出</h3><p>在实现更新操作时,一般大部分的操作,就是重新<code>UPDATE</code>刚读出并显示的全部数据,一次性将所有数据又送回表中,包括更新和未更新的数据.<br>这样做,在代码逻辑上虽然很简单,但是确实特别冗余,还浪费传输资源.所以该如何只更新修改的数据呢?</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
-<li>我自己踩坑的过程:<br>最初考虑的是能不能通过<code>UPDATE</code>复杂些的语法,SQL的函数之类的来实现根据前台传输的数据来让更新语句看起来’’动态’’些.翻看了很多SQL关键字和函数,实在是不知道怎么写这样的SQL语句.</li>
-<li><p>实际实现过程具体的思路:<br>  后台部分:</p>
-<ul>
-<li><p>比较容易实现,大体是通过遍历请求来的数据,拼接更新的SQL语句.</p>
-<p>前台部分:</p>
-</li>
-</ul>
-<ol>
-<li>为每一个文本框绑定一个<code>onchange</code>事件,文本框较多,所以考虑事件代理方式绑定<code>onchange</code>.<ul>
-<li>为整个文本框的父级绑定<code>onchange</code>事件.</li>
-<li>获取事件的<code>target.id</code>;</li>
-<li>将id值<code>push</code>到一个数组updateArr保存.</li>
-</ul>
-</li>
-<li>点击更新按钮后,异步发起请求,拼接请求的数据, 要请求的数据的键&amp;值通过刚updateArr来获取.<br><strong>拼接请求的字符串数据时,字符串中如何显示变量的值而不是变量名?</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var formData = &quot;&quot;;//请求的字符串</span><br><span class="line">   for (var i = 0; i &lt; updateArr.length; i++) &#123;</span><br><span class="line">       var node = updateArr[i];</span><br><span class="line">       var value = document.getElementById(node).value;</span><br><span class="line">       formData += `&amp;$&#123;updateArr[i]&#125;` + &quot;=&quot; + value;//使用es6模板字符串实现字符串输出变量值,而不是这个$&#123;updateArr[i]&#125;.</span><br><span class="line">   &#125;</span><br><span class="line">   formData = formData.substring(1, formData.length) + &quot;&amp;uid=&quot; + $(&quot;uid&quot;).value;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-</ul>
-<p>ps: 请求数据的<code>&quot;Content-Type&quot;</code>为<code>&quot;application/x-www-form-urlencoded&quot;</code><br>end</p>
-
-          
+          <h2 id="列表修改项的更新实现"><a href="#列表修改项的更新实现" class="headerlink" title="列表修改项的更新实现"></a>列表修改项的更新实现</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景:"></a>背景:</h3><p>在管理系统的实现中, 经常会碰到, 需要把数据库的数据某张表的数据显示在一个页面里, 然后在这个页面中对数据进行修改,最后将修改的内容<code>UPDATE</code>到数据库的表中.</p>
+<h3 id="问题的提出"><a href="#问题的提出" class="headerlink" title="问题的提出"></a>问题的提出</h3>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/14/列表修改项的更新实现/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
